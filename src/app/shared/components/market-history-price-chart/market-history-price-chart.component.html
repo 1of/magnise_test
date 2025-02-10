@@ -1,0 +1,11 @@
+<div id="chart-container">
+  <p>Charting data:</p>
+  <ejs-chart style='display:block; min-width: 500px;'  #chartcontainer id='chartcontainer'
+             [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'
+             [tooltip]='tooltip' (load)='load($event)' [chartArea]='chartArea' [width]='width' [legendSettings]='legend'
+             [zoomSettings]='zoom'>
+    <e-series-collection>
+      <e-series [dataSource]='data' type='Line' xName='timestamp' yName='price' name='Price' width=2 [marker]='diamondMarker' opacity=1></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>
