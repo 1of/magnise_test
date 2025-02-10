@@ -1,0 +1,38 @@
+<div>
+  <mat-form-field>
+    <mat-select [(value)]="selected" (selectionChange)="selectionChange($event);">
+      <mat-option disabled>Select Currency</mat-option>
+      @for (instrument of instruments; track instrument) {
+        <mat-option [value]="instrument.id">{{instrument.symbol}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <button mat-stroked-button
+          class="subscribe"
+          (click)="subscribe();"
+          [disabled]="!selected">{{!message.subscribe ? 'Subscribe': 'Stop'}}</button>
+</div>
+<p>Market data:</p>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="market-data">
+      <p>Symbol:
+        <br><span>{{getInstrumentByID(selected)?.symbol}}</span></p>
+      <p>Price:
+        <br><span *ngIf="getInstrumentByID(selected)?.symbol || price">
+        {{(price ? price : getLastChartItem()?.price) | currency: 'USD' : 'symbol' : '0.2-4'}}
+      </span></p>
+      <p>Time:
+        <br><span *ngIf="getInstrumentByID(selected)?.symbol || timestamp">
+        {{(timestamp ? timestamp: getLastChartItem()?.timestamp) | date:'medium'}}
+      </span></p>
+    </div>
+  </mat-card-content>
+</mat-card>
+<market-history-price-chart [data]="chartData"></market-history-price-chart>
+
+<p>You selected: {{selected}}</p>
+<p>Messages: </p>
+@for (message of messages; track message) {
+  <p> {{ message | json }}</p>
+}
