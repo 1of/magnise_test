@@ -46,12 +46,10 @@ export class AuthService {
     refresh_token_CookieExpDate.setSeconds(refresh_token_CookieExpDate.getSeconds() + refresh_tokenTokenExpire);
     this._cookieService.set('access_token', access_token, {
       expires: access_token_CookieExpDate,
-      path: '/',
       secure: true,
     });
     this._cookieService.set('refresh_token', refresh_token, {
       expires: refresh_token_CookieExpDate,
-      path: '/',
       secure: true,
     });
   }

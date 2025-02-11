@@ -1,6 +1,6 @@
-import {HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
+import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {inject, Injectable} from '@angular/core'
+import {Injectable} from '@angular/core'
 
 @Injectable()
   export class AuthInterceptor implements HttpInterceptor {

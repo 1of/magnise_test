@@ -21,14 +21,14 @@ export class MarketHistoryPriceChartComponent {
   @Input() public data: ChartItem[];
 
   // Chart Config
-  //Initializing Primary X Axis
+  // Initializing Primary X Axis
   public primaryXAxis: Object = {
     valueType: 'DateTime',
     labelFormat: 'y/M/d h:mm:ss',
     edgeLabelPlacement: 'Shift',
     minimum: new Date(2023, 6, 1)
   };
-  //Initializing Primary Y Axis
+  // Initializing Primary Y Axis
   public primaryYAxis: Object = {
     title: 'Price',
     // interval: 0.0001,
@@ -58,8 +58,6 @@ export class MarketHistoryPriceChartComponent {
   };
 
   maxVisiblePoints: number = 30;
-  constructor() {
-  }
 
   addItem(item: ChartItem) {
     if (this.chart instanceof ChartComponent) {
@@ -69,8 +67,6 @@ export class MarketHistoryPriceChartComponent {
         this.chart.series[0].removePoint?.(0);
       }
     }
-
   }
-
 
 }

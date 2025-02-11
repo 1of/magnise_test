@@ -1,23 +1,21 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {AuthService} from '../../services/auth.service';
 import {PricesService} from '../../services/prices.service';
 import {Instrument} from '../../interfaces/instruments.interfaces';
 import {WebSocketService} from '../../services/web-socket.service';
 import {Subscription} from 'rxjs';
-import {CommonModule, DatePipe, JsonPipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MarketHistoryPriceChartComponent} from '../market-history-price-chart/market-history-price-chart.component';
-import {chartValue} from '../market-history-price-chart/finacial-test-data';
 import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'market-price',
   imports: [MatFormFieldModule, MatSelectModule,
     MatButtonModule, MatCardModule,
-    JsonPipe, DatePipe, CommonModule, MarketHistoryPriceChartComponent],
+    DatePipe, CommonModule, MarketHistoryPriceChartComponent],
   templateUrl: './market-price.component.html',
   styleUrl: './market-price.component.scss'
 })

@@ -1,9 +1,9 @@
 <div>
   <mat-form-field>
     <mat-select [(value)]="selected" (selectionChange)="selectionChange($event);">
-      <mat-option disabled>Select Currency</mat-option>
+      <mat-option [value]="" disabled>Select Currency</mat-option>
       @for (instrument of instruments; track instrument) {
-        <mat-option [value]="instrument.id">{{instrument.symbol}}</mat-option>
+        <mat-option [value]="instrument.id" *ngIf="instrument.id">{{instrument.symbol}}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -30,9 +30,3 @@
   </mat-card-content>
 </mat-card>
 <market-history-price-chart [data]="chartData"></market-history-price-chart>
-
-<p>You selected: {{selected}}</p>
-<p>Messages: </p>
-@for (message of messages; track message) {
-  <p> {{ message | json }}</p>
-}
