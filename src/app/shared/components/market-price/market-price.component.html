@@ -20,11 +20,11 @@
         <br><span>{{getInstrumentByID(selected)?.symbol}}</span></p>
       <p>Price:
         <br><span *ngIf="getInstrumentByID(selected)?.symbol || price">
-        {{(price ? price : getLastChartItem()?.price) | currency: 'USD' : 'symbol' : '0.2-4'}}
+        {{(getLastChartItem()?.price ? getLastChartItem()?.price : price) | currency: 'USD' : 'symbol' : '0.2-4'}}
       </span></p>
       <p>Time:
         <br><span *ngIf="getInstrumentByID(selected)?.symbol || timestamp">
-        {{(timestamp ? timestamp: getLastChartItem()?.timestamp) | date:'medium'}}
+        {{(getLastChartItem()?.timestamp ? getLastChartItem()?.timestamp: timestamp) | date:'medium'}}
       </span></p>
     </div>
   </mat-card-content>

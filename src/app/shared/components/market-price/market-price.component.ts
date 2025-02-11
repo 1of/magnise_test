@@ -81,7 +81,6 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
   initPriceSubscription() {
     this.messageSubscription$ = this.webSocketService.getMessages().subscribe(
       (message) => {
-        console.log(message);
         this.messages.push(message);
         this.pushChartData(message);
       }
@@ -113,7 +112,6 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
     this.message.instrumentId = e.value;
     this.message.subscribe = false;
     this.pricesService.countBack(e.value).subscribe((res: any) => {
-      console.log(res);
       if(res.data && res.data.length) {
         this.price = res.data[0].c;
         this.timestamp = new Date(res.data[0].t);
@@ -129,6 +127,7 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
   }
   subscribe() {
     this.message.subscribe = !this.message.subscribe;
+    this.sendMessage();
   }
 
   pushChartData(m: any) {

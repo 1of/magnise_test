@@ -26,7 +26,6 @@ export class MarketHistoryPriceChartComponent {
     valueType: 'DateTime',
     labelFormat: 'y/M/d h:mm:ss',
     edgeLabelPlacement: 'Shift',
-    minimum: new Date(2023, 6, 1)
   };
   // Initializing Primary Y Axis
   public primaryYAxis: Object = {
