@@ -51,7 +51,7 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
   timestamp: Date|null = null;
 
   @ViewChild(MarketHistoryPriceChartComponent) marketHistoryChart:MarketHistoryPriceChartComponent;
-  private messageSubscription$: Subscription = Subscription.EMPTY;
+  private messageSubscription$: Subscription;
 
   constructor(private authService: AuthService,
               private pricesService: PricesService,
@@ -61,7 +61,6 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
     this.authService.getToken().subscribe(token => {
       if(token) {
         this.fetchInstruments();
-        this.initPriceSubscription();
       }
     }, error => {
       // error handlers
@@ -79,12 +78,15 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
   }
 
   initPriceSubscription() {
-    this.messageSubscription$ = this.webSocketService.getMessages().subscribe(
-      (message) => {
-        this.messages.push(message);
-        this.pushChartData(message);
-      }
-    );
+    if(!this.messageSubscription$) {
+      this.webSocketService.initConnection();
+      this.messageSubscription$ = this.webSocketService.getMessages().subscribe(
+        (message) => {
+          this.messages.push(message);
+          this.pushChartData(message);
+        }
+      );
+    }
   }
 
   getInstrumentByID(id: string) {
@@ -112,6 +114,7 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
     this.message.instrumentId = e.value;
     this.message.subscribe = false;
     this.pricesService.countBack(e.value).subscribe((res: any) => {
+      this.chartData = [];
       if(res.data && res.data.length) {
         this.price = res.data[0].c;
         this.timestamp = new Date(res.data[0].t);
@@ -127,6 +130,7 @@ export class MarketPriceComponent implements OnInit, OnDestroy{
   }
   subscribe() {
     this.message.subscribe = !this.message.subscribe;
+    this.initPriceSubscription();
     this.sendMessage();
   }
 

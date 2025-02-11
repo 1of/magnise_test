@@ -12,7 +12,11 @@ export class WebSocketService {
   private socket$: WebSocketSubject<any> = webSocket('');
 
   constructor(private _cookieService: CookieService) {
-    const access_token = _cookieService.get('access_token');
+    this.initConnection();
+  }
+
+  initConnection() {
+    const access_token = this._cookieService.get('access_token');
     if(access_token) {
       this.socket$ = webSocket(this.wss_url + '/api/streaming/ws/v1/realtime?token='+access_token);
     }
